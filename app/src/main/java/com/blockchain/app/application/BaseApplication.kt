@@ -1,13 +1,34 @@
 package com.blockchain.app.application
 
-import com.blockchain.app.injection.component.DaggerApplicationComponent
-import dagger.android.support.DaggerApplication
+import android.app.Application
+import androidx.lifecycle.LifecycleObserver
+import com.blockchain.app.di.AppInjector
+import com.blockchain.app.di.component.AppComponent
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
 
-class BaseApplication : DaggerApplication() {
-    private val applicationInjector = DaggerApplicationComponent.builder()
-        .application(this)
-        .build()
+class BaseApplication: Application(), LifecycleObserver, HasAndroidInjector {
 
-    override fun applicationInjector() = applicationInjector
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector() = dispatchingAndroidInjector
+
+
+    override fun onCreate() {
+        super.onCreate()
+        initializeDagger()
+
+    }
+
+    private fun initializeDagger() {
+        appComponent = AppInjector.init(this)
+    }
+
+    companion object {
+        lateinit var appComponent: AppComponent
+    }
+
 }

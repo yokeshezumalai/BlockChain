@@ -1,4 +1,4 @@
-package com.blockchain.app.injection.component
+package com.blockchain.app.di.component
 
 import javax.inject.Scope
 

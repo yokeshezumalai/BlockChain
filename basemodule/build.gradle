@@ -14,17 +14,10 @@ android {
     }
 
     buildTypes {
-        debug {
-            rootProject.extensions.alwaysUpdateBuildId = false
-        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    androidExtensions {
-        experimental = true
     }
 
     compileOptions {

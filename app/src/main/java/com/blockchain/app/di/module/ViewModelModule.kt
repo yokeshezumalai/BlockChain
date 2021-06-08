@@ -1,7 +1,7 @@
-package com.blockchain.app.injection.module
+package com.blockchain.app.di.module
 
 import androidx.lifecycle.ViewModel
-import com.blockchain.app.injection.util.ViewModelKey
+import com.blockchain.app.di.util.ViewModelKey
 import com.blockchain.app.presentation.TransactionViewModel
 import dagger.Binds
 import dagger.Module

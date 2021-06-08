@@ -1,4 +1,4 @@
-package com.blockchain.app.injection.module
+package com.blockchain.app.di.module
 
 import androidx.lifecycle.ViewModelProvider
 import com.blockchain.base.presentation.BaseViewModelFactory

@@ -1,4 +1,4 @@
-package com.blockchain.app.injection.util
+package com.blockchain.app.di.util
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

@@ -1,10 +1,12 @@
-package com.blockchain.app.injection.module
+package com.blockchain.app.di.module
+
 import com.blockchain.app.presentation.TransactionFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
+@Suppress("unused")
 @Module
-abstract class FragmentBuilderModule {
+abstract class FragmentModule {
     @ContributesAndroidInjector
-    internal abstract fun bindTransactionFragment(): TransactionFragment
+    abstract fun contributeTransactionFragment(): TransactionFragment
 }

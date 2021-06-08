@@ -1,52 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/size16">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/chartHeaderLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bodyContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/chartHeader"
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/infoTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_20" />
+            android:text="Bitcoin Value"
+            android:textAppearance="@style/TextAppearance.Bitlue.Overline"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:layout_constraintBottom_toTopOf="@id/currentBitcoinValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
-            android:id="@+id/chartDescription"
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/currentBitcoinValue"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/chartHeader"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/size16"
-            android:textSize="@dimen/text_size_16" />
-    </RelativeLayout>
+            android:layout_marginTop="@dimen/medium"
+            android:textAppearance="@style/TextAppearance.Bitlue.Headline2"
+            android:textColor="?colorOnBackground"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_33percent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/infoTitle"
+            tools:text="$57,764.0" />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chartView"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_below="@+id/chartHeaderLayout"
-        android:layout_marginTop="@dimen/size16"
-        />
+        <com.blockchain.app.widgets.BlockChainCustomChart
+            android:id="@+id/valuesChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/medium"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_33percent" />
 
-    <TextView
-        android:id="@+id/chart_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chartView"
-        android:layout_margin="@dimen/text_size_16"
-        android:textSize="@dimen/text_size_16" />
+        <ProgressBar
+            android:id="@+id/loadingBar"
+            style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
-    <include
-        layout="@layout/layout_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-</RelativeLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_33percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.33" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

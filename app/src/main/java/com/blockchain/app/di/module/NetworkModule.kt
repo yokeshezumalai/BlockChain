@@ -1,4 +1,4 @@
-package com.blockchain.app.injection.module
+package com.blockchain.app.di.module
 import com.blockchain.app.network.ApiClientInterface
 import com.blockchain.app.utils.Constants
 import java.util.concurrent.TimeUnit

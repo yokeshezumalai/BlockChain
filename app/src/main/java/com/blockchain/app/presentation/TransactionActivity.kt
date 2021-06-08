@@ -5,11 +5,21 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
 import com.blockchain.app.R
+import com.blockchain.app.di.Injectable
 import com.blockchain.base.presentation.BaseActivity
 
 import dagger.android.AndroidInjection
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-class TransactionActivity : BaseActivity() {
+class TransactionActivity : BaseActivity(), HasAndroidInjector {
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector() = dispatchingAndroidInjector
+
     private lateinit var navController: NavController
     private lateinit var navGraph: NavGraph
 
@@ -18,7 +28,6 @@ class TransactionActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setUpNavigation()
     }
