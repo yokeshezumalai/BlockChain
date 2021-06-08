@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    compileSdkVersion rootProject.ext.versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.versions.minSdk
+        targetSdkVersion rootProject.ext.versions.targetSdk
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        debug {
+            rootProject.extensions.alwaysUpdateBuildId = false
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    // dagger
+    implementation "com.google.dagger:dagger:$rootProject.ext.versions.dagger"
+    implementation "com.google.dagger:dagger-android:$rootProject.ext.versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.ext.versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.ext.versions.dagger"
+    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:$rootProject.ext.versions.assisted_inject"
+    kapt "com.squareup.inject:assisted-inject-processor-dagger2:$rootProject.ext.versions.assisted_inject"
+
+}

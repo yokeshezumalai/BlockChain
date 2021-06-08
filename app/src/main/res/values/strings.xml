@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BlockChain</string>
+    <string name="transaction_fragment_label">TransactionFragment</string>
+    <string name="market_price_usd">Market Price (USD)</string>
+    <string name="chart_info_text">This chart shows bitcoin data for last 30 days. x-axis shows date label
+    and y-axis shows Bitcoin prices in USD.</string>
+    <string name="transaction_data_error">Error while loading transaction data, try again later!!!</string>
+</resources>

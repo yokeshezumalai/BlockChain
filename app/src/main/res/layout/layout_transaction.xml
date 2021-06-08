@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/size16">
+
+    <RelativeLayout
+        android:id="@+id/chartHeaderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/chartHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_20" />
+
+        <TextView
+            android:id="@+id/chartDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chartHeader"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size16"
+            android:textSize="@dimen/text_size_16" />
+    </RelativeLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chartView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/chartHeaderLayout"
+        android:layout_marginTop="@dimen/size16"
+        />
+
+    <TextView
+        android:id="@+id/chart_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chartView"
+        android:layout_margin="@dimen/text_size_16"
+        android:textSize="@dimen/text_size_16" />
+
+    <include
+        layout="@layout/layout_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+</RelativeLayout>
