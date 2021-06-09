@@ -13,5 +13,5 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(TransactionViewModel::class)
-    internal abstract fun bindTransactionViewModel(transactionViewModel: TransactionViewModel): ViewModel
+    abstract fun bindTransactionViewModel(transactionViewModel: TransactionViewModel): ViewModel
 }

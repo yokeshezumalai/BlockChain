@@ -19,4 +19,7 @@
     <dimen name="xxx_large">32dp</dimen>
     <dimen name="xxxx_large">40dp</dimen>
 
+    <dimen name="segment_height">39dp</dimen>
+    <dimen name="segment_padding">10dp</dimen>
+
 </resources>

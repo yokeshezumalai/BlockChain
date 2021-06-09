@@ -46,7 +46,7 @@ class BlockChainCustomChart @JvmOverloads constructor(
         // Let user touch to highlight a selected value
         setTouchEnabled(true)
 
-        setBorderColor(ContextCompat.getColor(context, R.color.colorPrimary))
+        setBorderColor(ContextCompat.getColor(context, R.color.main_app_color))
         marker = PriceMarkerView(context, R.layout.view_chart_marker).apply {
             chartView = this@BlockChainCustomChart
         }
@@ -74,14 +74,14 @@ class BlockChainCustomChart @JvmOverloads constructor(
 
     private fun setupXAxis() {
         xAxis.valueFormatter = xAxisValueFormatter
-        xAxis.gridColor = ContextCompat.getColor(context, R.color.colorBlue)
-        xAxis.textColor = ContextCompat.getColor(context, R.color.colorPrimary)
+        xAxis.gridColor = ContextCompat.getColor(context, R.color.secondary_color)
+        xAxis.textColor = ContextCompat.getColor(context, R.color.main_app_color)
         xAxis.setDrawAxisLine(false)
     }
 
     private fun setupYAxis() {
         axisLeft.valueFormatter = yAxisValueFormatter
-        axisLeft.textColor = ContextCompat.getColor(context, R.color.colorPrimary)
+        axisLeft.textColor = ContextCompat.getColor(context, R.color.main_app_color)
         axisLeft.setDrawAxisLine(false)
         axisLeft.setDrawZeroLine(false)
         axisLeft.setDrawGridLines(false)
@@ -91,7 +91,7 @@ class BlockChainCustomChart @JvmOverloads constructor(
 
     private fun setupNoDataText(
         text: String = "Loading",
-        @ColorInt textColor: Int =  ContextCompat.getColor(context, R.color.colorPrimary)
+        @ColorInt textColor: Int =  ContextCompat.getColor(context, R.color.main_app_color)
     ) {
         setNoDataText(text)
         setNoDataTextColor(textColor)
@@ -107,7 +107,7 @@ class BlockChainCustomChart @JvmOverloads constructor(
     }
 
     private fun getLineDataSet(entries: List<Entry>) = LineDataSet(entries, "").apply {
-        color = ContextCompat.getColor(context, R.color.colorPrimary)
+        color = ContextCompat.getColor(context, R.color.main_app_color)
         fillDrawable =
             ContextCompat.getDrawable(context, R.drawable.gradient_primary_to_transparent)
         valueTextSize = 0f
@@ -115,7 +115,7 @@ class BlockChainCustomChart @JvmOverloads constructor(
         setDrawFilled(true)
         setDrawCircles(false)
 
-        highLightColor = ContextCompat.getColor(context, R.color.colorAccent)
+        highLightColor = ContextCompat.getColor(context, R.color.secondary_color)
         setDrawHorizontalHighlightIndicator(false)
     }
 }

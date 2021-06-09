@@ -17,6 +17,7 @@ package com.blockchain.app.di.component
 
 import android.app.Application
 import com.blockchain.app.application.BaseApplication
+import com.blockchain.app.di.module.FragmentModule
 import com.blockchain.app.di.module.TransactionActivityModule
 import com.blockchain.app.presentation.TransactionActivity
 import dagger.BindsInstance

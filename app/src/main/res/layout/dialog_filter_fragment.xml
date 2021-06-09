@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="20dp"
+    tools:context=".presentation.TransactionActivity"
+    style="@style/BottomSheetDialogTheme"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_rounded_white_background"
+    android:backgroundTint="@color/white"
+    android:clipChildren="true"
+    android:orientation="vertical"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <View
+        android:id="@+id/draggerBar"
+        android:layout_width="@dimen/xxxx_large"
+        android:layout_height="@dimen/medium"
+        android:layout_marginTop="@dimen/large"
+        android:background="@drawable/gray_rounded_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timeRangeFilter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x_large"
+        android:text="@string/time_span"
+        android:textColor="@color/dark_gray"
+        android:fontFamily="@font/the_sans_arabic_bold"
+        app:layout_constraintStart_toEndOf="@+id/guideline_marginStart"
+        app:layout_constraintTop_toBottomOf="@+id/draggerBar" />
+
+    <segmented_control.widget.custom.android.com.segmentedcontrol.SegmentedControl
+        android:id="@+id/filters"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/segment_height"
+        android:layout_gravity="center|center_horizontal|center_vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layoutDirection="ltr"
+        app:columnCount="5"
+        app:distributeEvenly="true"
+        app:fontAssetPath="@string/segment_font"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeRangeFilter_title"
+        app:radius="12dp"
+        app:radiusForEverySegment="false"
+        app:segments="@array/time_spans"
+        app:selectedBackgroundColor="@color/secondary_color"
+        app:selectedStrokeColor="@color/secondary_color"
+        app:selectedTextColor="@color/segmentSelTxt"
+        app:textSize="12sp"
+        app:textVerticalPadding="@dimen/segment_padding"
+        app:unSelectedBackgroundColor="@color/segmentUnSelBg"
+        app:unSelectedStrokeColor="@color/secondary_color"
+        app:unSelectedTextColor="@color/secondary_color" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_marginStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/x_large" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_marginEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/x_large" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="@string/apply"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:backgroundTint="@color/secondary_color"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="@color/secondary_color"
+        app:layout_constraintTop_toBottomOf="@+id/filters"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

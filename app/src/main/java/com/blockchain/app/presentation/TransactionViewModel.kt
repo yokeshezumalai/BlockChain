@@ -11,6 +11,7 @@ import com.blockchain.base.presentation.BaseViewModel
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.liveData
+import com.blockchain.app.AppConfig
 import com.blockchain.app.data.mapper.PriceMapper
 import com.blockchain.app.data.model.MarketPriceDetails
 import com.blockchain.app.data.model.TransactionInfo
@@ -31,29 +32,23 @@ class TransactionViewModel @Inject constructor(private val transactionRepository
 
     val transactionInfo = MutableLiveData<TransactionInfo>()
 
-    fun createDataSetForChart(entityData: List<SingleEntityData>): ArrayList<Entry> {
-        val lineEntries: ArrayList<Entry> = ArrayList()
-        for (e in entityData) {
-            val entry = Entry(e.x.toFloat(), e.y.toFloat())
-            lineEntries.add(entry)
-        }
-        return lineEntries
-    }
+    val timeSpanFilter = MutableLiveData<String>()
 
-
-    fun getBitCoinChart(isGetTransactions: Boolean) = liveData(Dispatchers.IO) {
+    /**
+     * Method to get the bitcoin chart details
+     */
+    fun getBitCoinChart(chartType: String, timeSpan: String?) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            if(isGetTransactions){
-                emit(Resource.success(data = transactionRepository.getBitCoinTransactions()))
-            }else{
-                emit(Resource.success(data = transactionRepository.getMarketPriceChart()))
-            }
+            emit(Resource.success(data = transactionRepository.getBitCoinChart(chartType, timeSpan)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
 
+    /**
+     * Method to filter the values
+     */
     fun getFilterMappedValues(transactionInfoValue: TransactionInfo): MarketPriceDetails {
         return MarketPriceDetails(
             name = transactionInfoValue.name,
@@ -64,7 +59,17 @@ class TransactionViewModel @Inject constructor(private val transactionRepository
         )
     }
 
+    /**
+     * Method to get the current bitcoin value
+     */
     fun getCurrentBitcoinValue(transactionInfo: TransactionInfo) : String{
         return getFilterMappedValues(transactionInfo).bitcoinValues.last().getPriceStringFormat()
+    }
+
+    /**
+     * Method to set the current bitcoin value to the textview
+     */
+    fun setCurrentBitcoinValue(marketPrice: MarketPriceDetails) : String{
+        return marketPrice.bitcoinValues.last().getPriceStringFormat()
     }
 }

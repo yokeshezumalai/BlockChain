@@ -1,14 +1,12 @@
 package com.blockchain.app.data.repository
 
-import com.blockchain.app.network.ApiClientInterface
+import com.blockchain.app.network.APIs
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
-class TransactionRepository @Inject constructor(private val apiHelper: ApiClientInterface) {
+class TransactionRepository @Inject constructor(private val apiHelper: APIs) {
 
-    suspend fun getMarketPriceChart() = apiHelper.getMarketPriceChart()
-
-    suspend fun getBitCoinTransactions() = apiHelper.getBitCoinTransactions()
+    suspend fun getBitCoinChart(chartType: String, timeSpan: String?) = apiHelper.getBitCoinChart(chartType, timeSpan)
 }

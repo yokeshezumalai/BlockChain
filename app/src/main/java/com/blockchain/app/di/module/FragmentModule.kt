@@ -1,5 +1,6 @@
 package com.blockchain.app.di.module
 
+import com.blockchain.app.presentation.FilterDialogFragment
 import com.blockchain.app.presentation.TransactionFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -9,4 +10,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeTransactionFragment(): TransactionFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeFilterDialogFragment(): FilterDialogFragment
 }

@@ -1,6 +1,6 @@
 package com.blockchain.app.di.module
-import com.blockchain.app.network.ApiClientInterface
-import com.blockchain.app.utils.Constants
+import com.blockchain.app.AppConfig
+import com.blockchain.app.network.APIs
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import dagger.Module
@@ -15,14 +15,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkModule {
     @Provides
     @Singleton
-    internal fun provideApiClientInterface(retrofit: Retrofit): ApiClientInterface {
-        return retrofit.create(ApiClientInterface::class.java)
+    internal fun provideApiClientInterface(retrofit: Retrofit): APIs {
+        return retrofit.create(APIs::class.java)
     }
 
     @Provides
     @Singleton
     internal fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl(Constants.BASE_API_URL).client(okHttpClient)
+        return Retrofit.Builder().baseUrl(AppConfig.BASE_API_URL).client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

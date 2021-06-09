@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BCTitleBar">
+        <attr name="titleText" format="string"/>
+        <attr name="titleBarBackgroundColor" format="integer"/>
+        <attr name="extraIcon" format="reference"/>
+        <attr name="extraTextButton" format="string|reference"/>
+        <attr name="extraIconShow" format="boolean"/>
+        <attr name="backIconHide" format="boolean"/>
+        <attr name="secondIcon" format="reference"/>
+        <attr name="secondIconShow" format="boolean"/>
+
+    </declare-styleable>
+</resources>

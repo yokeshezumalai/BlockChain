@@ -2,7 +2,30 @@
     <string name="app_name">BlockChain</string>
     <string name="transaction_fragment_label">TransactionFragment</string>
     <string name="market_price_usd">Market Price (USD)</string>
-    <string name="chart_info_text">This chart shows bitcoin data for last 30 days. x-axis shows date label
-    and y-axis shows Bitcoin prices in USD.</string>
+    <string name="total_bitcoins">Total Bitcoins</string>
+    <string name="transaction_fees">Transaction Fees</string>
+    <string name="transaction_per_second">Transaction Per Second</string>
+    <string name="market_capitalization">Market Capitalization (USD)</string>
+    <string name="exchange_trade_volume">Exchange Trade Volume (USD)</string>
+    <string name="average_block_size">Average Block Size (MB)</string>
+    <string name="block_chain">Block Chain</string>
     <string name="transaction_data_error">Error while loading transaction data, try again later!!!</string>
+    <string name="time_span">Time Span</string>
+    <string name="thirty_days">30 Days</string>
+    <string name="ninty_days">90 Days</string>
+    <string name="six_months">6 Months</string>
+    <string name="one_year">1 Year</string>
+
+    <string-array name="time_spans">
+        <item>30 Days</item>
+        <item>3 Months</item>
+        <item>6 Months</item>
+        <item>1 Year</item>
+        <item>All</item>
+    </string-array>
+
+    <string name="apply">Apply</string>
+
+    <!-- Font -->
+    <string name="segment_font" translatable="false">fonts/the_sans_arabic_plain.ttf</string>
 </resources>

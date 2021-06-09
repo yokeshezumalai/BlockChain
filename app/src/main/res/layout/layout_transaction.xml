@@ -4,25 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bodyContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.blockchain.app.widgets.BCTitleBar
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:extraIconShow="true"
+            app:extraIcon="@drawable/ic_filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/infoTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bitcoin Value"
-            android:textAppearance="@style/TextAppearance.Bitlue.Overline"
+            android:text="@string/market_price_usd"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:theme="@style/Theme.MaterialComponents.Light"
             app:layout_constraintBottom_toTopOf="@id/currentBitcoinValue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleBar"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -30,9 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium"
-            android:textAppearance="@style/TextAppearance.Bitlue.Headline2"
+            android:textSize="20sp"
             android:textColor="?colorOnBackground"
             android:theme="@style/Theme.MaterialComponents.Light"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintBottom_toTopOf="@+id/guideline_33percent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +70,7 @@
         <ProgressBar
             android:id="@+id/loadingBar"
             style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+            android:progressTint="@color/secondary_color"
             android:layout_width="80dp"
             android:layout_height="0dp"
             android:indeterminate="true"
@@ -71,4 +89,25 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.33" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/white"
+            android:fitsSystemWindows="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    layout="@layout/main_side_menu"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
