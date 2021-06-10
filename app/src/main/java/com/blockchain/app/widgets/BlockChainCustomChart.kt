@@ -6,10 +6,9 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.blockchain.app.R
 import com.blockchain.app.data.model.MarketValue
-import com.blockchain.app.data.utils.Resource.Companion.loading
 import com.blockchain.app.helper.DateAxisValueFormatter
 import com.blockchain.app.helper.PriceAxisValueFormatter
-import com.blockchain.app.helper.PriceMarkerView
+import com.blockchain.app.helper.ValueMarker
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
@@ -20,6 +19,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Custom Block Chain Chart Compoennt extends the functions from MPAndroidChartViewLibrary
+ */
 class BlockChainCustomChart @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -27,8 +29,8 @@ class BlockChainCustomChart @JvmOverloads constructor(
 ) : LineChart(context, attrs, defStyle) {
 
     companion object {
-        const val CHART_X_ANIMATION_DURATION = 2000
-        val DEFAULT_ANIMATION_EASING: Easing.EasingFunction = Easing.EaseInOutQuad
+        const val CHART_X_ANIMATION_DURATION = 1500
+        val DEFAULT_ANIMATION_EASING: Easing.EasingFunction = Easing.EaseInOutSine
     }
 
     private val xAxisValueFormatter = DateAxisValueFormatter()
@@ -47,7 +49,7 @@ class BlockChainCustomChart @JvmOverloads constructor(
         setTouchEnabled(true)
 
         setBorderColor(ContextCompat.getColor(context, R.color.main_app_color))
-        marker = PriceMarkerView(context, R.layout.view_chart_marker).apply {
+        marker = ValueMarker(context, R.layout.value_chart).apply {
             chartView = this@BlockChainCustomChart
         }
 
@@ -89,10 +91,7 @@ class BlockChainCustomChart @JvmOverloads constructor(
         axisRight.isEnabled = false
     }
 
-    private fun setupNoDataText(
-        text: String = "Loading",
-        @ColorInt textColor: Int =  ContextCompat.getColor(context, R.color.main_app_color)
-    ) {
+    private fun setupNoDataText(text: String? = context?.getString(R.string.loading), @ColorInt textColor: Int =  ContextCompat.getColor(context, R.color.main_app_color)) {
         setNoDataText(text)
         setNoDataTextColor(textColor)
     }
@@ -109,7 +108,7 @@ class BlockChainCustomChart @JvmOverloads constructor(
     private fun getLineDataSet(entries: List<Entry>) = LineDataSet(entries, "").apply {
         color = ContextCompat.getColor(context, R.color.main_app_color)
         fillDrawable =
-            ContextCompat.getDrawable(context, R.drawable.gradient_primary_to_transparent)
+            ContextCompat.getDrawable(context, R.drawable.gradient_chart_background)
         valueTextSize = 0f
 
         setDrawFilled(true)

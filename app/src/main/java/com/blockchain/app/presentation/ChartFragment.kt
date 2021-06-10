@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.layout_transaction.*
 import kotlinx.android.synthetic.main.main_side_menu.*
 
 
-class TransactionFragment : BaseFragment(), Injectable {
+class ChartFragment : BaseFragment(), Injectable {
     private val TAG = "TransactionFragment"
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory

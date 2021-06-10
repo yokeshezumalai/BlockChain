@@ -12,7 +12,7 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 
 @SuppressLint("ViewConstructor")
-class PriceMarkerView(
+class ValueMarker(
     context: Context,
     @LayoutRes layoutResource: Int
 ) : MarkerView(context, layoutResource) {

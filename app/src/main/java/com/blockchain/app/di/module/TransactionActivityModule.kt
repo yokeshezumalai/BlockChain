@@ -1,6 +1,6 @@
 package com.blockchain.app.di.module
 
-import com.blockchain.app.presentation.TransactionActivity
+import com.blockchain.app.presentation.ChartActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -8,6 +8,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class TransactionActivityModule {
     @ContributesAndroidInjector(modules = [FragmentModule::class])
-    abstract fun contributeAssistActionActivity() : TransactionActivity
+    abstract fun contributeAssistActionActivity() : ChartActivity
 
 }
