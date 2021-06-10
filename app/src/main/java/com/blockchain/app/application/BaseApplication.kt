@@ -9,7 +9,7 @@ import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 
-class BaseApplication: Application(), LifecycleObserver, HasAndroidInjector {
+open class BaseApplication: Application(), LifecycleObserver, HasAndroidInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>

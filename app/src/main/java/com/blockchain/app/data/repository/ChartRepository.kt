@@ -6,7 +6,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-class TransactionRepository @Inject constructor(private val apiHelper: APIs) {
+class ChartRepository @Inject constructor(private val apiHelper: APIs) {
 
     suspend fun getBitCoinChart(chartType: String, timeSpan: String?) = apiHelper.getBitCoinChart(chartType, timeSpan)
 }

@@ -104,6 +104,10 @@ dependencies {
 
     implementation project(':basemodule')
 
+    debugImplementation('androidx.fragment:fragment-testing:1.3.4', {
+        exclude group: 'androidx.test', module: 'core'
+    })
+
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -155,8 +159,6 @@ dependencies {
 
     // test
     testImplementation "junit:junit:$versions.junit"
-    testImplementation "androidx.test:core:$versions.test_core"
-    testImplementation "org.robolectric:robolectric:$versions.robolectric"
     testImplementation "org.mockito:mockito-core:$versions.mockito"
     testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okhttp"
     androidTestImplementation "androidx.test:runner:$versions.runner"
@@ -164,5 +166,35 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-android:$versions.mockito"
     androidTestImplementation "com.google.truth:truth:$versions.truth"
     testImplementation "com.google.truth:truth:0.42"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
+    testImplementation "androidx.arch.core:core-testing:$versions.arch_core"
+    testImplementation "androidx.test:core:$versions.robolectric"
+    testImplementation "org.robolectric:robolectric:4.3"
+    testImplementation "org.mockito:mockito-inline:$versions.mockito"
+    testImplementation 'org.json:json:20180813'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coRountines"
+
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation "androidx.test:runner:$versions.atsl_runner"
+    androidTestImplementation "androidx.test:rules:$versions.atsl_runner"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$versions.espresso"
+
+
+
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+
+    androidTestImplementation "android.arch.navigation:navigation-testing:$nav_version" // Test helpers for navigation
+
+
+    debugImplementation 'androidx.fragment:fragment-testing:1.1.0-alpha03', {
+        exclude group: 'androidx.test', module: 'core'
+    }
+    debugImplementation("androidx.fragment:fragment-ktx:1.4.0-alpha02")
+    debugImplementation("androidx.test:core:1.3.0")
+    debugImplementation("androidx.test:rules:1.3.0")
+    debugImplementation("androidx.test:runner:1.3.0")
 
 }

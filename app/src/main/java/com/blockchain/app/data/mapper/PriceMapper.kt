@@ -12,7 +12,7 @@ class PriceMapper : DomainMapper<MarketValue, SingleEntityData> {
         )
     }
 
-    override fun mapToDomainModelList(dtoModelList: List<SingleEntityData>): List<MarketValue> {
-        return dtoModelList.map { mapToDomainModel(it) }
+    override fun mapToDomainModelList(dtoModelList: List<SingleEntityData>?): List<MarketValue>? {
+        return dtoModelList?.map { mapToDomainModel(it) }
     }
 }

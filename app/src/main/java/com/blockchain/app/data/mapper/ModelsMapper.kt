@@ -14,5 +14,5 @@ interface DomainMapper<DomainModel, DTOModel> {
 
     fun mapToDomainModel(dtoModel: DTOModel): DomainModel
 
-    fun mapToDomainModelList(dtoModelList: List<DTOModel>): List<DomainModel>
+    fun mapToDomainModelList(dtoModelList: List<DTOModel>?): List<DomainModel>?
 }

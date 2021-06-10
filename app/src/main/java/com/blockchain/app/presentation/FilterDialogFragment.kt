@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.blockchain.app.AppConfig
 import com.blockchain.app.R
@@ -14,7 +13,6 @@ import com.blockchain.app.di.Injectable
 import com.blockchain.base.presentation.BaseViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_filter_fragment.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 import kotlin.apply
 
@@ -22,8 +20,8 @@ class FilterDialogFragment : BottomSheetDialogFragment(), Injectable {
 
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory
-    private val viewModel: TransactionViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(TransactionViewModel::class.java)
+    private val viewModel: ChartViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(ChartViewModel::class.java)
     }
 
     interface Callback {

@@ -1,32 +1,19 @@
 package com.blockchain.app.presentation
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.asLiveData
-import com.blockchain.app.data.repository.TransactionRepository
+import com.blockchain.app.data.repository.ChartRepository
 import javax.inject.Inject
-import com.blockchain.app.data.model.SingleEntityData
 import com.blockchain.app.data.utils.Resource
 import com.blockchain.base.presentation.BaseViewModel
-import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.liveData
-import com.blockchain.app.AppConfig
 import com.blockchain.app.data.mapper.PriceMapper
 import com.blockchain.app.data.model.MarketPriceDetails
 import com.blockchain.app.data.model.TransactionInfo
-import com.blockchain.app.widgets.BlockChainCustomChart
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
-import kotlin.collections.ArrayList
 
 
-class TransactionViewModel @Inject constructor(private val transactionRepository: TransactionRepository) :
+class ChartViewModel @Inject constructor(private val transactionRepository: ChartRepository) :
     BaseViewModel() {
 
 
@@ -53,7 +40,7 @@ class TransactionViewModel @Inject constructor(private val transactionRepository
         return MarketPriceDetails(
             name = transactionInfoValue.name,
             description = transactionInfoValue.description,
-            bitcoinValues = PriceMapper().mapToDomainModelList(transactionInfoValue.values).onEach {
+            bitcoinValues = PriceMapper().mapToDomainModelList(transactionInfoValue.values)?.onEach {
                 it.currency = Currency.getInstance(transactionInfoValue.unit)
             }
         )
@@ -62,14 +49,14 @@ class TransactionViewModel @Inject constructor(private val transactionRepository
     /**
      * Method to get the current bitcoin value
      */
-    fun getCurrentBitcoinValue(transactionInfo: TransactionInfo) : String{
-        return getFilterMappedValues(transactionInfo).bitcoinValues.last().getPriceStringFormat()
+    fun getCurrentBitcoinValue(transactionInfo: TransactionInfo) : String?{
+        return getFilterMappedValues(transactionInfo).bitcoinValues?.last()?.getPriceStringFormat()
     }
 
     /**
      * Method to set the current bitcoin value to the textview
      */
-    fun setCurrentBitcoinValue(marketPrice: MarketPriceDetails) : String{
-        return marketPrice.bitcoinValues.last().getPriceStringFormat()
+    fun setCurrentBitcoinValue(marketPrice: MarketPriceDetails) : String?{
+        return marketPrice.bitcoinValues?.last()?.getPriceStringFormat()
     }
 }

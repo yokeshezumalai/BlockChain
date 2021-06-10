@@ -24,8 +24,8 @@ class ChartFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory
 
-    private val viewModel: TransactionViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(TransactionViewModel::class.java)
+    private val viewModel: ChartViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(ChartViewModel::class.java)
     }
 
     companion object {
@@ -150,7 +150,7 @@ class ChartFragment : BaseFragment(), Injectable {
         viewModel.transactionInfo.value = data
         val chartData = viewModel.getFilterMappedValues(data)
         currentBitcoinValue.text = viewModel.setCurrentBitcoinValue(chartData)
-        valuesChart?.show(chartData.bitcoinValues)
+        chartData.bitcoinValues?.let { valuesChart?.show(it) }
     }
 
 
