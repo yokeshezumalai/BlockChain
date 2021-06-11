@@ -4,14 +4,21 @@ BitCoin Market prices application:  Simple app to fetch Bitcoin market prices us
 
 Developed using MVVM Architecture on Kotlin.
 
-Libraries used:
-
-Retrofit
-Dagger for dependency injection
-Used Navigation Graph component.
-Created NetworkModule and implemented OkHttpClient inside that.
-MPAndroidChart.
-RxKotlin for reactive programming.
+- Accessed the Open Source Blockchain API via RetroFit Network Calls.
+- 100% Kotlin
+- Modular Project Structure
+- Clean Architecture with SOLID Principles
+- Used Dagger - Dependency injection
+- Created NetworkModule and implemented OkHttpClient inside that.
+- Created a CustomOkHttpInterceptor - We can add a common header for all the API's here
+- Used MVVM - Model View View Model - Fragment - ViewModel - Repo - API
+- Live Data
+- Used Data Binding for views
+- CoRountines
+- Material Design Components
+- MPAndroidChart
+- Unit Testing - View Model Testing , Repo Testing, API Testsing using Mockito
+- Instrumenation Testing with Espresso for UI Testing
 
 
 
