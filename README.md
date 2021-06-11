@@ -1,5 +1,5 @@
 # BlockChain
-BitCoin Market prices application:  Simple app to fetch Bitcoin market prices using "https://api.blockchain.info" and show that in graphical format.  
+BitCoin Market prices application:  Simple app to fetch Bitcoin market prices using [BlockChain API](https://www.blockchain.com/charts) and show that in graphical format.  
 
 
 Developed using MVVM Architecture on Kotlin.
@@ -16,13 +16,11 @@ Developed using MVVM Architecture on Kotlin.
 - Used Data Binding for views
 - CoRountines
 - Material Design Components
-- MPAndroidChart
+- [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
 - Unit Testing - View Model Testing , Repo Testing, API Testsing using Mockito
 - Instrumenation Testing with Espresso for UI Testing
 
 
-
-https://github.com/yokeshezumalai/BlockChain
 
 ### License
 ```
