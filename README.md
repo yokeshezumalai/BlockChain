@@ -1,7 +1,6 @@
 # BlockChain
 BitCoin Market prices application:  Simple app to fetch Bitcoin market prices using "https://api.blockchain.info" and show that in graphical format.  
 
-![Screen_Recording_20210611-180518_BlockChain_1](https://user-images.githubusercontent.com/8406906/121709175-f19cc400-cae0-11eb-82b6-c98a166b6f94.gif)
 
 Developed using MVVM Architecture on Kotlin.
 
