@@ -8,7 +8,7 @@ data class MarketValue(
     val price: Double
 ) {
 
-    lateinit var currency: Currency
+    var currency: Currency = Currency.getInstance("USD")
 
     companion object {
         const val MAX_FRACTION_DIGITS = 2

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingBottom="20dp"
+    android:id="@+id/dialog"
     tools:context=".presentation.ChartActivity"
     style="@style/BottomSheetDialogTheme"
     android:layout_width="match_parent"
@@ -48,7 +49,7 @@
         app:fontAssetPath="@string/segment_font"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeRangeFilter_title"
-        app:radius="12dp"
+        app:radius="8dp"
         app:radiusForEverySegment="false"
         app:segments="@array/time_spans"
         app:selectedBackgroundColor="@color/secondary_color"
@@ -74,7 +75,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/x_large" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btnApply"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -84,10 +85,8 @@
         android:layout_marginTop="16dp"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:backgroundTint="@color/secondary_color"
         android:theme="@style/Theme.MaterialComponents.Light"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:background="@color/secondary_color"
+        android:background="@drawable/btn_green_bg"
         app:layout_constraintTop_toBottomOf="@+id/filters"
         app:layout_constraintBottom_toBottomOf="parent" />
 

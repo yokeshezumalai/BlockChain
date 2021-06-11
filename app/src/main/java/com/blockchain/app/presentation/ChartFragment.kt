@@ -1,46 +1,46 @@
 package com.blockchain.app.presentation
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.blockchain.app.AppConfig
 import javax.inject.Inject
 import com.blockchain.app.data.model.TransactionInfo
 import com.blockchain.app.R
 import com.blockchain.app.data.utils.Status
+import com.blockchain.app.databinding.ChartFragmentBinding
 import com.blockchain.app.di.Injectable
 import com.blockchain.app.widgets.BCTitleBar
 import com.blockchain.base.presentation.BaseFragment
 import com.blockchain.base.presentation.BaseViewModelFactory
-import kotlinx.android.synthetic.main.layout_transaction.*
+import kotlinx.android.synthetic.main.chart_fragment.*
 import kotlinx.android.synthetic.main.main_side_menu.*
+import util.OpenForTesting
 
+@OpenForTesting
+open class ChartFragment : BaseFragment(), Injectable {
 
-class ChartFragment : BaseFragment(), Injectable {
-    private val TAG = "TransactionFragment"
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory
 
-    private val viewModel: ChartViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(ChartViewModel::class.java)
-    }
+    private lateinit var viewModel: ChartViewModel
 
-    companion object {
-        private var chartType = AppConfig.GET_MARKET_PRICE
-        private var timeSpan: String? = AppConfig.THREE_MONTH
-    }
+    private lateinit var binding: ChartFragmentBinding
 
-    override fun layoutRes(): Int {
-        return R.layout.layout_transaction
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        DataBindingUtil.inflate<ChartFragmentBinding>(inflater, R.layout.chart_fragment, container, false).also {
+            binding = it
+            viewModel = ViewModelProvider(this, viewModelFactory).get(ChartViewModel::class.java)
+            binding.viewModel = viewModel
+            binding.lifecycleOwner = this
+        }.root
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        fetchTransactionData(chartType, timeSpan)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,8 +48,14 @@ class ChartFragment : BaseFragment(), Injectable {
         setupView()
     }
 
+    /**
+     * Method to setup view
+     */
     private fun setupView(){
 
+        /**
+         * Custom Title Bar
+         */
         titleBar.setListener(object : BCTitleBar.Callback {
             override fun onStartButtonClick() {
                 drawer.openDrawer(GravityCompat.START)
@@ -60,69 +66,75 @@ class ChartFragment : BaseFragment(), Injectable {
                     requireActivity(),
                     callback = object : FilterDialogFragment.Callback {
                         override fun onDialogClose(filter: String?) {
-                            timeSpan = filter
-                            fetchTransactionData(chartType, filter)
+                            if(!filter.isNullOrEmpty()){
+                                viewModel.timeSpan.value = filter
+                                fetchTransactionData()
+                            }
                         }
                     })
             }
         })
 
+        viewModel.chartName.value = context?.getString(R.string.market_price_usd)
+
+        fetchTransactionData()
+
+        // Side Menu - To display the different data with Different charts
         marketPrice.setOnClickListener {
-            infoTitle.text = marketPrice.text
             drawer.closeDrawer(GravityCompat.START)
-            chartType = AppConfig.GET_MARKET_PRICE
-            fetchTransactionData(chartType, timeSpan)
+            viewModel.chartName.value = marketPrice.text.toString()
+            viewModel.chartType.value = AppConfig.GET_MARKET_PRICE
+            fetchTransactionData()
         }
 
         totalBitCoins.setOnClickListener {
-            infoTitle.text = totalBitCoins.text
             drawer.closeDrawer(GravityCompat.START)
-            chartType = AppConfig.TOTAL_BITCOINS
-            fetchTransactionData(chartType, timeSpan)
+            viewModel.chartName.value = totalBitCoins.text.toString()
+            viewModel.chartType.value = AppConfig.TOTAL_BITCOINS
+            fetchTransactionData()
         }
 
         transactionFees.setOnClickListener {
-            infoTitle.text = transactionFees.text
             drawer.closeDrawer(GravityCompat.START)
-            chartType = AppConfig.TRANSACTION_FEES
-            fetchTransactionData(chartType, timeSpan)
+            viewModel.chartName.value = transactionFees.text.toString()
+            viewModel.chartType.value = AppConfig.TRANSACTION_FEES
+            fetchTransactionData()
         }
 
         transactionsPerSecond.setOnClickListener {
-            infoTitle.text = transactionsPerSecond.text
             drawer.closeDrawer(GravityCompat.START)
-            chartType = AppConfig.TRANSACTIONS_PER_SECOND
-            fetchTransactionData(chartType, timeSpan)
+            viewModel.chartName.value = transactionsPerSecond.text.toString()
+            viewModel.chartType.value = AppConfig.TRANSACTIONS_PER_SECOND
+            fetchTransactionData()
         }
 
         marketCap.setOnClickListener {
-            infoTitle.text = marketCap.text
             drawer.closeDrawer(GravityCompat.START)
-            chartType = AppConfig.MARKET_CAP
-            fetchTransactionData(chartType, timeSpan)
+            viewModel.chartName.value = marketCap.text.toString()
+            viewModel.chartType.value = AppConfig.MARKET_CAP
+            fetchTransactionData()
         }
 
         exchangeTradeVolume.setOnClickListener {
-            infoTitle.text = exchangeTradeVolume.text
             drawer.closeDrawer(GravityCompat.START)
-            chartType = AppConfig.TRADE_VOLUME
-            fetchTransactionData(chartType, timeSpan)
+            viewModel.chartName.value = exchangeTradeVolume.text.toString()
+            viewModel.chartType.value = AppConfig.TRADE_VOLUME
+            fetchTransactionData()
         }
 
         avgBlockSize.setOnClickListener {
-            infoTitle.text = avgBlockSize.text
             drawer.closeDrawer(GravityCompat.START)
-            chartType = AppConfig.AVG_BLOCK_SIZE
-            fetchTransactionData(chartType, timeSpan)
+            viewModel.chartName.value = avgBlockSize.text.toString()
+            viewModel.chartType.value = AppConfig.AVG_BLOCK_SIZE
+            fetchTransactionData()
         }
-
-        viewModel.transactionInfo.observe(viewLifecycleOwner, Observer {
-            currentBitcoinValue.text = viewModel.getCurrentBitcoinValue(it)
-        })
     }
 
-    private fun fetchTransactionData(chartType: String, timeSpan: String?) {
-        viewModel.getBitCoinChart(chartType, timeSpan).observe(viewLifecycleOwner, Observer {
+    /**
+     * Method to fetch the transactions
+     */
+    private fun fetchTransactionData() {
+        viewModel.getBitCoinChart().observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -135,7 +147,7 @@ class ChartFragment : BaseFragment(), Injectable {
                     Status.ERROR -> {
                         loadingBar.visibility = View.GONE
                         valuesChart.visibility = View.GONE
-                        Toast.makeText(context, "Error Occured", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, context?.getString(R.string.transaction_data_error), Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
                         loadingBar.visibility = View.VISIBLE
@@ -146,11 +158,14 @@ class ChartFragment : BaseFragment(), Injectable {
         })
     }
 
+    /**
+     * Method to set data
+     */
     private fun setData(data: TransactionInfo){
         viewModel.transactionInfo.value = data
         val chartData = viewModel.getFilterMappedValues(data)
-        currentBitcoinValue.text = viewModel.setCurrentBitcoinValue(chartData)
         chartData.bitcoinValues?.let { valuesChart?.show(it) }
+        viewModel.setCurrentBitcoinValue(chartData)
     }
 
 

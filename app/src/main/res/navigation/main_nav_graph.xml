@@ -6,7 +6,7 @@
 
     <fragment android:id="@+id/transaction_fragment"
         android:name="com.blockchain.app.presentation.ChartFragment"
-        tools:layout="@layout/layout_transaction"
+        tools:layout="@layout/chart_fragment"
         android:label="@string/transaction_fragment_label">
 
     </fragment>

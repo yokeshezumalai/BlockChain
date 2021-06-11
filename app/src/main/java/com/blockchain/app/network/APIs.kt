@@ -9,5 +9,5 @@ import retrofit2.http.Query
 interface APIs {
 
     @GET("/charts/{chartType}")
-    suspend fun getBitCoinChart(@Path("chartType") chartType: String, @Query("timespan") timespan: String?): TransactionInfo
+    suspend fun getBitCoinChart(@Path("chartType") chartType: String?, @Query("timespan") timespan: String?): TransactionInfo
 }

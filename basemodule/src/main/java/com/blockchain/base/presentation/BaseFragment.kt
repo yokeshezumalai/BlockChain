@@ -14,17 +14,6 @@ import androidx.annotation.LayoutRes
 abstract class BaseFragment : DaggerFragment(){
     private var activity: AppCompatActivity? = null
 
-    @LayoutRes
-    protected abstract fun layoutRes(): Int
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(layoutRes(), container, false)
-        return view
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

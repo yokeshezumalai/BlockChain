@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.blockchain.app.presentation.ChartViewModel" />
+
+    </data>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,7 +43,7 @@
             android:id="@+id/infoTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/market_price_usd"
+            android:text="@{viewModel.chartName}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:theme="@style/Theme.MaterialComponents.Light"
             app:layout_constraintBottom_toTopOf="@id/currentBitcoinValue"
@@ -47,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium"
             android:textSize="20sp"
+            android:text="@{viewModel.chartValue}"
             android:textColor="?colorOnBackground"
             android:theme="@style/Theme.MaterialComponents.Light"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
@@ -111,3 +123,4 @@
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

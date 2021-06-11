@@ -7,13 +7,15 @@ import com.blockchain.app.data.utils.Resource
 import com.blockchain.base.presentation.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.liveData
+import com.blockchain.app.AppConfig
 import com.blockchain.app.data.mapper.PriceMapper
 import com.blockchain.app.data.model.MarketPriceDetails
 import com.blockchain.app.data.model.TransactionInfo
+import util.OpenForTesting
 import java.util.*
 
-
-class ChartViewModel @Inject constructor(private val transactionRepository: ChartRepository) :
+@OpenForTesting
+open class ChartViewModel @Inject constructor(private val transactionRepository: ChartRepository) :
     BaseViewModel() {
 
 
@@ -21,13 +23,19 @@ class ChartViewModel @Inject constructor(private val transactionRepository: Char
 
     val timeSpanFilter = MutableLiveData<String>()
 
+    val chartName = MutableLiveData<String>()
+    var chartValue = MutableLiveData<String>()
+
+    var chartType = MutableLiveData<String>(AppConfig.GET_MARKET_PRICE)
+    var timeSpan = MutableLiveData<String>(AppConfig.THREE_MONTH)
+
     /**
      * Method to get the bitcoin chart details
      */
-    fun getBitCoinChart(chartType: String, timeSpan: String?) = liveData(Dispatchers.IO) {
+    fun getBitCoinChart() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = transactionRepository.getBitCoinChart(chartType, timeSpan)))
+            emit(Resource.success(data = transactionRepository.getBitCoinChart(chartType.value, timeSpan.value)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
@@ -37,26 +45,41 @@ class ChartViewModel @Inject constructor(private val transactionRepository: Char
      * Method to filter the values
      */
     fun getFilterMappedValues(transactionInfoValue: TransactionInfo): MarketPriceDetails {
-        return MarketPriceDetails(
-            name = transactionInfoValue.name,
-            description = transactionInfoValue.description,
-            bitcoinValues = PriceMapper().mapToDomainModelList(transactionInfoValue.values)?.onEach {
-                it.currency = Currency.getInstance(transactionInfoValue.unit)
-            }
-        )
+        return if(transactionInfoValue.unit?.contains("USD")!!){
+            MarketPriceDetails(
+                name = transactionInfoValue.name,
+                description = transactionInfoValue.description,
+                unit = transactionInfoValue.unit,
+                bitcoinValues = PriceMapper().mapToDomainModelList(transactionInfoValue.values)?.onEach {
+                    it.currency = Currency.getInstance(transactionInfoValue.unit)
+                }
+            )
+        }else{
+            MarketPriceDetails(
+                name = transactionInfoValue.name,
+                description = transactionInfoValue.description,
+                unit = transactionInfoValue.unit,
+                bitcoinValues = PriceMapper().mapToDomainModelList(transactionInfoValue.values)
+            )
+        }
     }
 
     /**
      * Method to get the current bitcoin value
      */
-    fun getCurrentBitcoinValue(transactionInfo: TransactionInfo) : String?{
+    fun getCurrentBitcoinValue(transactionInfo: TransactionInfo): String?{
         return getFilterMappedValues(transactionInfo).bitcoinValues?.last()?.getPriceStringFormat()
     }
 
     /**
      * Method to set the current bitcoin value to the textview
      */
-    fun setCurrentBitcoinValue(marketPrice: MarketPriceDetails) : String?{
-        return marketPrice.bitcoinValues?.last()?.getPriceStringFormat()
+    fun setCurrentBitcoinValue(marketPrice: MarketPriceDetails){
+        val chartText = marketPrice.bitcoinValues?.last()
+        if(marketPrice.unit?.contains("USD")!!){
+            chartValue.value = chartText?.getPriceStringFormat()
+        }else{
+            chartValue.value = chartText?.price?.toString()
+        }
     }
 }

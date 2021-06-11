@@ -64,6 +64,9 @@ class FilterDialogFragment : BottomSheetDialogFragment(), Injectable {
         setupView()
     }
 
+    /**
+     * Method to setup view
+     */
     private fun setupView(){
 
         filters.addOnSegmentClickListener {

@@ -42,6 +42,18 @@ class TransactionInfo() : Parcelable {
 
             override fun newArray(size: Int) = arrayOfNulls<TransactionInfo>(size)
         }
+
+        fun prepare(period: String, name: String, description: String, status: String, unit: String) : TransactionInfo{
+
+            val transactionInfo = TransactionInfo()
+            transactionInfo.period = period
+            transactionInfo.name = name
+            transactionInfo.description = description
+            transactionInfo.status = status
+            transactionInfo.unit = unit
+
+            return transactionInfo
+        }
     }
 
     override fun toString(): String {
